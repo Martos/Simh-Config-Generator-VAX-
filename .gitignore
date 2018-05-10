@@ -1,0 +1,9 @@
+#IDEA
+.idea
+
+#BUILD
+out/
+META-INF/
+
+#MISC
+vax.ini
