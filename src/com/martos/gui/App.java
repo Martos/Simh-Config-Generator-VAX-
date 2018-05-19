@@ -19,6 +19,7 @@ public class App {
     private JComboBox data_disk_type;
     private JLabel eth_mac_label;
     private JTextField eth_mac_text;
+    private JCheckBox cpu_idle_check;
 
     private String[] cpu_modes = { "64", "128", "256", "512" };
 
@@ -40,6 +41,11 @@ public class App {
                     writer.println();
                     writer.println(";CPU");
                     writer.println("set cpu " + cpu_combo.getSelectedItem() + "m");
+
+                    if (cpu_idle_check.isSelected()) {
+                        writer.println("set cpu idle=VMS");
+                    }
+
                     writer.println();
                     writer.println(";DISK");
                     writer.println("set rq0 " + disk_type.getSelectedItem());
@@ -63,7 +69,7 @@ public class App {
 
                     writer.println("attach rq3 " + cd);
                     writer.println();
-                    writer.println("set r1 disable");
+                    writer.println("set rl disable");
                     writer.println("set ts disable");
                     writer.println();
                     writer.println(";ETHERNET (Default)");
@@ -83,6 +89,9 @@ public class App {
                     writer.println(";For ethernet, please use simh to find the right network card with : SHOW ETH");
 
                     writer.close();
+
+                    JOptionPane.showMessageDialog(null, "Config created !");
+
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
                 }
